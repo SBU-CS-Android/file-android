@@ -9,20 +9,20 @@ import java.util.ArrayList;
 
 public class SendServerTask extends AsyncTask<Void,Void,Void> {
 
-  private final ArrayList<String> messages;
+  private final ArrayList<User> users;
 
-  public SendServerTask(ArrayList<String> messages) {
-    this.messages = messages;
+  public SendServerTask(ArrayList<User> users) {
+    this.users = users;
   }
 
   @Override
   protected Void doInBackground(Void... voids) {
     try {
-      Socket socket = new Socket("172.20.97.180", 5000);
+      Socket socket = new Socket("172.20.113.8", 5000);
       DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-      dataOutputStream.writeUTF(messages.size() + "");
-      for (String message : messages) {
-        dataOutputStream.writeUTF(message);
+      dataOutputStream.writeUTF(users.size() + "");
+      for (User user : users) {
+        dataOutputStream.writeUTF(user.getUsername());
         dataOutputStream.flush();
       }
       dataOutputStream.close();
