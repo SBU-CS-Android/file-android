@@ -31,8 +31,18 @@ public class MainActivity extends AppCompatActivity {
     pickImageButton.setOnClickListener(new Button.OnClickListener() {
       @Override
       public void onClick(View view) {
-        Intent gallery = new Intent(Intent.ACTION_GET_CONTENT);
-        gallery.setType("*/*");
+        /*
+        Genius!!! this opens up the gallery
+         */
+        Intent gallery = new Intent(Intent.ACTION_PICK);
+        gallery.setType("image/*");
+        gallery.putExtra("crop", "true");
+        gallery.putExtra("scale", true);
+        gallery.putExtra("outputX", 256);
+        gallery.putExtra("outputY", 256);
+        gallery.putExtra("aspectX", 1);
+        gallery.putExtra("aspectY", 1);
+        gallery.putExtra("return-data", true);
         startActivityForResult(gallery,1);
       }
     });
